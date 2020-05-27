@@ -1,0 +1,6 @@
+[submodule "src/reducers/common-reducers"]
+	path = src/reducers/common-reducers
+	url = git@github.com:samuelchvez/common-reducers.git
+[submodule "src/lib/common-http-js"]
+	path = src/lib/common-http-js
+	url = git@github.com:samuelchvez/common-http-js.git
