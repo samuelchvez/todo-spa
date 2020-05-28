@@ -33,4 +33,8 @@ export default {
   october: 'Octubre',
   november: 'Noviembre',
   december: 'Diciembre',
+  required: 'Required',
+  email: 'Email',
+  password: 'Password',
+  login: 'Login',
 };

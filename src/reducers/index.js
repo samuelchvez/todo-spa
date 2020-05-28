@@ -17,7 +17,7 @@ export default combineReducers({
 
 export const getAuthToken = (state: STATE_TYPE): ?string => authSelectors.getAuthToken(state.auth);
 export const getIsAuthenticating = (state: STATE_TYPE): boolean => authSelectors.getIsAuthenticating(state.auth);
-export const getLoginError = (state: STATE_TYPE): ?ERROR_TYPE => authSelectors.getLoginError(state.auth);
+export const getAuthenticationError = (state: STATE_TYPE): ?ERROR_TYPE => authSelectors.getAuthenticationError(state.auth);
 export const isAuthenticated = (state: STATE_TYPE): boolean => getAuthToken(state) != null;
 export const getAuthUserID = (state: STATE_TYPE): ?ID_TYPE => authSelectors.getAuthUserID(state.auth);
 export const getAuthExpiration = (state: STATE_TYPE): ?number => authSelectors.getAuthExpiration(state.auth);

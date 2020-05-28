@@ -12,7 +12,7 @@ export type AuthState = {
   decoded: ?Object,
   isAuthenticating: boolean,
   isRefreshing: boolean,
-  loginError: ?ERROR_TYPE,
+  authenticationError: ?ERROR_TYPE,
   refreshingError: ?ERROR_TYPE,
 };
 
@@ -51,7 +51,7 @@ const isAuthenticating = common.isFetching({
   failed: [types.AUTHENTICATION_FAILED],
 });
 
-const loginError = common.error({
+const authenticationError = common.error({
   populate: [types.AUTHENTICATION_FAILED],
   clear: [
     types.AUTHENTICATION_STARTED,
@@ -79,7 +79,7 @@ const auth = combineReducers({
   decoded,
   isAuthenticating,
   isRefreshing,
-  loginError,
+  authenticationError,
   refreshingError,
 });
 
@@ -89,7 +89,7 @@ export default auth;
 
 export const getAuthToken = (state: AuthState): ?string => state.token;
 export const getIsAuthenticating = (state: AuthState): boolean => state.isAuthenticating;
-export const getLoginError = (state: AuthState): ?ERROR_TYPE => state.loginError;
+export const getAuthenticationError = (state: AuthState): ?ERROR_TYPE => state.authenticationError;
 export const getAuthUserID = (state: AuthState): ?ID_TYPE => state.decoded ? state.decoded.user_id : null;
 export const getAuthExpiration = (state: AuthState): ?number => state.decoded ? state.decoded.exp : null;
 export const getAuthUsername = (state: AuthState): ?string => state.decoded ? state.decoded.username : null;
