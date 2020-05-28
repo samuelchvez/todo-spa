@@ -1,6 +1,6 @@
 // @flow
 import storage from 'redux-persist/lib/storage';
-import { createTransform } from 'redux-persist';
+// import { createTransform } from 'redux-persist';
 
 import * as settings from '../settings';
 

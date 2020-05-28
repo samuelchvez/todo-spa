@@ -5511,6 +5511,11 @@ is-docker@^2.0.0:
   resolved "https://registry.yarnpkg.com/is-docker/-/is-docker-2.0.0.tgz#2cb0df0e75e2d064fe1864c37cdeacb7b2dcf25b"
   integrity sha512-pJEdRugimx4fBMra5z2/5iRdZ63OhYV0vr0Dwm5+xtW4D1FvRkB8hamMIhnWfyJeDdyr/aa7BDyNbtG38VxgoQ==
 
+is-empty-object@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/is-empty-object/-/is-empty-object-1.1.1.tgz#86d5d4d5c5229cea31ec2772f528bf5efc519f23"
+  integrity sha1-htXU1cUinOox7Cdy9Si/XvxRnyM=
+
 is-extendable@^0.1.0, is-extendable@^0.1.1:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/is-extendable/-/is-extendable-0.1.1.tgz#62b110e289a471418e3ec36a617d472e301dfc89"

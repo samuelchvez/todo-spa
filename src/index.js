@@ -11,7 +11,7 @@ import * as serviceWorker from './serviceWorker';
 import './entry';
 import configureStore from './store/configureStore';
 import Router from './router';
-import App from './components/App';
+
 
 
 const { store, persistor } = configureStore();

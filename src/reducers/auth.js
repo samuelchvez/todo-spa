@@ -1,4 +1,4 @@
-//@flow
+// @flow
 import jwtDecode from 'jwt-decode';
 import { combineReducers } from 'redux';
 
@@ -24,7 +24,7 @@ const token = common.keyExtractor({
   ],
   set: [
     types.AUTHENTICATION_COMPLETED,
-    types.TOKEN_REFRESH_COMPLETED,
+    types.AUTHENTICATION_REFRESH_COMPLETED,
   ],
   extractionKey: 'token',
   default: null,
@@ -38,7 +38,7 @@ const decoded = common.keyExtractor({
   ],
   set: [
     types.AUTHENTICATION_COMPLETED,
-    types.TOKEN_REFRESH_COMPLETED,
+    types.AUTHENTICATION_REFRESH_COMPLETED,
   ],
   extractionKey: 'token',
   transform: jwtDecode,
@@ -60,16 +60,16 @@ const loginError = common.error({
 });
 
 const isRefreshing = common.isFetching({
-  started: [types.TOKEN_REFRESH_STARTED],
-  succeed: [types.TOKEN_REFRESH_COMPLETED],
-  failed: [types.TOKEN_REFRESH_FAILED],
+  started: [types.AUTHENTICATION_REFRESH_STARTED],
+  succeed: [types.AUTHENTICATION_REFRESH_COMPLETED],
+  failed: [types.AUTHENTICATION_REFRESH_FAILED],
 });
 
 const refreshingError = common.error({
-  populate: [types.TOKEN_REFRESH_FAILED],
+  populate: [types.AUTHENTICATION_REFRESH_FAILED],
   clear: [
-    types.TOKEN_REFRESH_STARTED,
-    types.TOKEN_REFRESH_COMPLETED,
+    types.AUTHENTICATION_REFRESH_STARTED,
+    types.AUTHENTICATION_REFRESH_COMPLETED,
   ],
 });
 
