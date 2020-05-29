@@ -13,3 +13,9 @@ export const TokenAuthentication = new Resource({
   name: 'token-auth',
   api,
 });
+
+export const Account = new Resource({
+  name: 'users',
+  api,
+});
+

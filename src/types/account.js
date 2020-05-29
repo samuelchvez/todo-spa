@@ -1,0 +1,31 @@
+// @flow
+import type { ERROR_TYPE } from './common';
+
+
+export type ACCOUNT_CREATION_STARTED_TYPE = {
+  type: 'ACCOUNT_CREATION_STARTED',
+  payload: {
+    firstName: string,
+    username: string,
+    email: string,
+    password: string,
+  },
+}
+export const ACCOUNT_CREATION_STARTED = 'ACCOUNT_CREATION_STARTED';
+
+export type ACCOUNT_CREATION_COMPLETED_TYPE = {
+  type: 'ACCOUNT_CREATION_COMPLETED',
+}
+export const ACCOUNT_CREATION_COMPLETED = 'ACCOUNT_CREATION_COMPLETED';
+
+export type ACCOUNT_CREATION_FAILED_TYPE = {
+  type: 'ACCOUNT_CREATION_FAILED',
+  payload: ERROR_TYPE,
+}
+export const ACCOUNT_CREATION_FAILED = 'ACCOUNT_CREATION_FAILED';
+
+
+export type ACCOUNT_CREATION_ACTION_TYPE =
+  | ACCOUNT_CREATION_STARTED_TYPE
+  | ACCOUNT_CREATION_COMPLETED_TYPE
+  | ACCOUNT_CREATION_FAILED_TYPE;

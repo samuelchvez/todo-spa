@@ -1,11 +1,14 @@
 // @flow
 import i18n from 'i18n-js';
-import React, { Fragment } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { Form, Field } from 'react-final-form';
 
+import styles from './LoginForm.module.scss';
 import * as selectors from '../../reducers';
 import * as actions from '../../actions/auth';
+import ExternalInput from '../ExternalInput';
+import ExternalButton from '../ExternalButton';
 
 
 type LoginFormPropTypes = {
@@ -29,26 +32,28 @@ const LoginForm = ({ onSubmit, isLoading = false }: LoginFormPropTypes) => (
     validate={validate}
     render={
       ({ handleSubmit }) => (
-        <form onSubmit={handleSubmit}>
+        <form
+          onSubmit={handleSubmit}
+          className={styles.loginForm}
+        >
           <Field
             name="username"
-            placeholder={i18n.t('email')}
-            component="input"
+            placeholder={i18n.t('username')}
+            component={ExternalInput}
           />
           <Field
             type="password"
             name="password"
             placeholder={i18n.t('password')}
-            component="input"
+            component={ExternalInput}
           />
-          <button type="submit">
+          <ExternalButton type="submit">
             { i18n.t('login') }
-          </button>
+          </ExternalButton>
         </form>
       )
     }
-  >
-  </Form>
+  />
 );
 
 

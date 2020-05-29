@@ -2,18 +2,18 @@
 import {
   call,
   takeEvery,
-  put,
+  // put,
   race,
   // all,
   delay,
-  select,
+  // select,
 } from 'redux-saga/effects';
 
-import { API_BASE_URL, REQUEST_TIMEOUT } from '../settings';
+import { REQUEST_TIMEOUT } from '../settings';
 import { throwTimeout } from '../lib/common-http-js';
 import { TokenAuthentication } from '../api';
-import * as selectors from '../reducers';
-import * as actions from '../actions/auth';
+// import * as selectors from '../reducers';
+// import * as actions from '../actions/auth';
 import * as types from '../types/auth';
 
 
@@ -21,15 +21,17 @@ function* login(action) {
   try {
     const { response, timeout } = yield race({
       response: call(
-        TokenAuthentication.create,
+        [TokenAuthentication, 'create'],
         { data: action.payload },
       ),
-      timeout: call(delay, REQUEST_TIMEOUT),
+      timeout: delay(REQUEST_TIMEOUT),
     });
 
     if (timeout) {
       throwTimeout('login saga');
     }
+
+    console.log("RESPONSE", response);
 
     // if (response.status === 200) {
     //   const { token } = yield response.json();
@@ -39,6 +41,7 @@ function* login(action) {
     //   yield put(actions.failLogin(non_field_errors[0]));
     // }
   } catch (error) {
+    console.log("errorazo", error)
     // yield put(actions.failLogin('Falló horrible la conexión mano'));
   }
 }

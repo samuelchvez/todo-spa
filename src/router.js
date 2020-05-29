@@ -4,13 +4,14 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link
+  // Link
 } from 'react-router-dom';
 // import { Redirect } from 'react-router-dom';
 // import { connectedReduxRedirect } from 'redux-auth-wrapper/history4/redirect';
 
-import * as selectors from './reducers';
+// import * as selectors from './reducers';
 import LoginView from './components/views/Login';
+import CreateAccountView from './components/views/CreateAccount';
 // import DashboardView from './components/views/Dashboard';
 // import CalendarView from './components/views/Calendar';
 // import ReportsView from './components/views/Reports';
@@ -26,14 +27,6 @@ import LoginView from './components/views/Login';
 //   wrapperDisplayName: 'UserIsAuthenticated',
 // });
 
-const routes = [
-  {
-    path: '/',
-    exact: true,
-    localize: false,
-    component: LoginView,
-  },
-];
 
 // <Route path="/forbidden" component={ ForbiddenView } />
 // <Route path="/not-found" component={ NotFoundView } />
@@ -43,16 +36,8 @@ const routes = [
 export default () => (
   <Router>
     <Switch>
-      {
-        routes.map(route => (
-          <Route
-            key={route.path}
-            path={route.path}
-            exact={route.exact}
-            component={route.component}
-          />
-        ))
-      }
+      <Route path="/" component={LoginView} exact />
+      <Route path="/create-account" component={CreateAccountView} exact />
     </Switch>
   </Router>
 );

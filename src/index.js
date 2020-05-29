@@ -8,6 +8,7 @@ import { PersistGate } from 'redux-persist/integration/react';
 
 import * as serviceWorker from './serviceWorker';
 
+import './styles/global.module.scss';
 import './entry';
 import configureStore from './store/configureStore';
 import Router from './router';
@@ -22,7 +23,7 @@ ReactDOM.render(
       <PersistGate loading={null} persistor={persistor}>
         <Router />
       </PersistGate>
-    </Provider>,
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );

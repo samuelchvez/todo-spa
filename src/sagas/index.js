@@ -4,11 +4,15 @@ import {
   watchLoginStarted,
   // watchRefreshTokenStarted,
 } from './auth';
+import {
+  watchAccountCreationStarted,
+} from './account';
 
 
 function* mainSaga() {
   yield all([
     fork(watchLoginStarted),
+    fork(watchAccountCreationStarted),
     // fork(watchRefreshTokenStarted),
   ]);
 }
