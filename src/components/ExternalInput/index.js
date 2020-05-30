@@ -18,13 +18,13 @@ type ExternalInputPropTypes = {
 
 const ExternalInput = ({ input, placeholder, meta }: ExternalInputPropTypes) => (
   <>
-    {
-      meta.error && meta.touched && (
-        <div className={styles.error}>
-          { meta.error }
-        </div>
-      )
-    }
+    <div className={styles.error}>
+      {
+        meta.error && meta.touched && (
+          <span>{ meta.error }</span>
+        )
+      }
+    </div>
     <input
       className={styles.externalInput}
       { ...input }

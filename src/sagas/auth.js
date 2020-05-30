@@ -1,20 +1,19 @@
 // @flow
+import i18n from 'i18n-js';
 import {
   call,
   takeEvery,
-  // put,
+  put,
   race,
-  // all,
   delay,
-  // select,
 } from 'redux-saga/effects';
+import { toast } from 'react-toastify';
 
 import { REQUEST_TIMEOUT } from '../settings';
 import { throwTimeout } from '../lib/common-http-js';
 import { TokenAuthentication } from '../api';
-// import * as selectors from '../reducers';
-// import * as actions from '../actions/auth';
 import * as types from '../types/auth';
+import * as actions from '../actions/auth';
 
 
 function* login(action) {
@@ -31,18 +30,18 @@ function* login(action) {
       throwTimeout('login saga');
     }
 
-    console.log("RESPONSE", response);
-
-    // if (response.status === 200) {
-    //   const { token } = yield response.json();
-    //   yield put(actions.completeLogin(token));
-    // } else {
-    //   const { non_field_errors } = yield response.json();
-    //   yield put(actions.failLogin(non_field_errors[0]));
-    // }
+    const { token } = response;
+    yield put(actions.completeLogin(token));
   } catch (error) {
-    console.log("errorazo", error)
-    // yield put(actions.failLogin('Falló horrible la conexión mano'));
+    const { statusCode, message, data, isPlain } = error;
+    yield put(actions.failLogin({
+      status: statusCode,
+      message,
+      data: isPlain ? i18n.t('serverError'): data,
+      retryAction: action
+    }));
+
+    toast.error(Object.keys(data).map(key => data[key]).join(''));
   }
 }
 

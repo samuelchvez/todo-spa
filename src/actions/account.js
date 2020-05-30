@@ -23,9 +23,8 @@ export const startCreatingAccount = (
   },
 });
 
-export const completeCreatingAccount = (token: string): ACCOUNT_CREATION_COMPLETED_TYPE => ({
+export const completeCreatingAccount = (): ACCOUNT_CREATION_COMPLETED_TYPE => ({
   type: types.ACCOUNT_CREATION_COMPLETED,
-  payload: { token },
 });
 
 export const failCreatingAccount = (error: ERROR_TYPE): ACCOUNT_CREATION_FAILED_TYPE => ({

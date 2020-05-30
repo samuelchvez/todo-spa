@@ -35,4 +35,4 @@ export default account;
 
 
 export const getIsCreatingAccount = (state: AccountState): boolean => state.isCreating;
-export const getCreationError = (state: AccountState): ?ERROR_TYPE => state.creationError;
+export const getAccountCreationError = (state: AccountState): ?ERROR_TYPE => state.creationError;

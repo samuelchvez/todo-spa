@@ -1,19 +1,19 @@
 // @flow
+import i18n from 'i18n-js';
 import {
   call,
   takeEvery,
-  // put,
+  put,
   race,
-  // all,
   delay,
-  // select,
 } from 'redux-saga/effects';
+import { toast } from 'react-toastify';
 
 import { REQUEST_TIMEOUT } from '../settings';
 import { throwTimeout } from '../lib/common-http-js';
+import { history } from '../router';
 import { Account } from '../api';
-// import * as selectors from '../reducers';
-// import * as actions from '../actions/account';
+import * as actions from '../actions/account';
 import * as types from '../types/account';
 
 
@@ -26,7 +26,7 @@ function* createAccount(action) {
       password
     } = action.payload;
 
-    const { response, timeout } = yield race({
+    const { timeout } = yield race({
       response: call(
         [Account, 'create'],
         {
@@ -45,18 +45,21 @@ function* createAccount(action) {
       throwTimeout('createAccount saga');
     }
 
-    console.log("RESPONSE", response);
+    yield put(actions.completeCreatingAccount());
 
-    // if (response.status === 200) {
-    //   const { token } = yield response.json();
-    //   yield put(actions.completeLogin(token));
-    // } else {
-    //   const { non_field_errors } = yield response.json();
-    //   yield put(actions.failLogin(non_field_errors[0]));
-    // }
+    toast.success(i18n.t('accountCreationCompleted'));
+
+    yield call([history, history.push], '/');
   } catch (error) {
-    console.log("errorazo", error)
-    // yield put(actions.failLogin('Falló horrible la conexión mano'));
+    const { statusCode, message, data, isPlain } = error;
+    yield put(actions.failCreatingAccount({
+      status: statusCode,
+      message,
+      data: isPlain ? i18n.t('serverError'): data,
+      retryAction: action
+    }));
+
+    toast.error(Object.keys(data).map(key => data[key]).join(''));
   }
 }
 

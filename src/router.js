@@ -1,21 +1,14 @@
 // @flow
 import React from 'react';
 import {
-  BrowserRouter as Router,
+  Router,
   Switch,
   Route,
-  // Link
 } from 'react-router-dom';
-// import { Redirect } from 'react-router-dom';
-// import { connectedReduxRedirect } from 'redux-auth-wrapper/history4/redirect';
+import { createBrowserHistory } from 'history';
 
-// import * as selectors from './reducers';
 import LoginView from './components/views/Login';
 import CreateAccountView from './components/views/CreateAccount';
-// import DashboardView from './components/views/Dashboard';
-// import CalendarView from './components/views/Calendar';
-// import ReportsView from './components/views/Reports';
-// import ExternalView from './components/views/External';
 
 
 // const UserIsAuthenticated = connectedReduxRedirect({
@@ -28,16 +21,18 @@ import CreateAccountView from './components/views/CreateAccount';
 // });
 
 
-// <Route path="/forbidden" component={ ForbiddenView } />
-// <Route path="/not-found" component={ NotFoundView } />
-// <Route path="/" component={ LoginView } />
-// <Route path="*" component={ NotFoundView } />
+export const history = createBrowserHistory();
+
 
 export default () => (
-  <Router>
+  <Router history={history} forceRefresh>
     <Switch>
       <Route path="/" component={LoginView} exact />
       <Route path="/create-account" component={CreateAccountView} exact />
+      {/* <Route path="/forbidden" component={ ForbiddenView } /> */}
+      {/* <Route path="/not-found" component={ NotFoundView } /> */}
+      {/* <Route path="/" component={ LoginView } /> */}
+      {/* <Route path="*" component={ NotFoundView } /> */}
     </Switch>
   </Router>
 );

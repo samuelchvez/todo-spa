@@ -1,0 +1,26 @@
+@import '../components/styles/colors';
+
+body, html {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 8px;
+}
+
+textarea:focus, input:focus{
+  outline: none;
+}
+
+.Toastify__toast-body {
+  font-size: 2rem !important;
+}
+
+.Toastify__progress-bar--default {
+  background: $skyblue;
+}
+
+.Toastify__toast--error {
+  background: #e56c60;
+}
+
+.Toastify__toast--success {
+  background: #74c170;
+}

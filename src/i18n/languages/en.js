@@ -48,4 +48,6 @@ export default {
   invalidEmail: 'Invalid email',
   passwordTooShort: 'Password too short',
   passwordMissmatch: 'Password missmatch',
+  accountCreationCompleted: 'Account creation completed',
+  serverError: 'Server error',
 };

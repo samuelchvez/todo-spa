@@ -33,4 +33,4 @@ export const getRefreshingError = (state: STATE_TYPE): ?ERROR_TYPE => authSelect
 
 
 export const getIsCreatingAccount = (state: STATE_TYPE): boolean => accountSelectors.getIsCreatingAccount(state.account);
-export const getCreationError = (state: STATE_TYPE): ?ERROR_TYPE => accountSelectors.getCreationError(state.account);
+export const getAccountCreationError = (state: STATE_TYPE): ?ERROR_TYPE => accountSelectors.getAccountCreationError(state.account);

@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { Form, Field } from 'react-final-form';
 
 import styles from './LoginForm.module.scss';
+import type { ERROR_TYPE } from '../../types/common';
 import * as selectors from '../../reducers';
 import * as actions from '../../actions/account';
 import ExternalInput from '../ExternalInput';
@@ -14,6 +15,7 @@ import ExternalButton from '../ExternalButton';
 
 type CreateAccountPropTypes = {
   onSubmit: Function,
+  error?: ERROR_TYPE,
   isLoading: boolean
 };
 
@@ -45,7 +47,11 @@ const validate = (values) => {
   return errors;
 };
 
-const CreateAccountForm = ({ onSubmit, isLoading = false }: CreateAccountPropTypes) => (
+const CreateAccountForm = ({
+  onSubmit,
+  error,
+  isLoading = false,
+ }: CreateAccountPropTypes) => (
   <Form
     onSubmit={onSubmit}
     validate={validate}
@@ -55,6 +61,7 @@ const CreateAccountForm = ({ onSubmit, isLoading = false }: CreateAccountPropTyp
           onSubmit={handleSubmit}
           className={styles.createAccountForm}
         >
+          {/* { error } */}
           <Field
             name="firstName"
             placeholder={i18n.t('firstName')}
@@ -94,6 +101,7 @@ const CreateAccountForm = ({ onSubmit, isLoading = false }: CreateAccountPropTyp
 
 export default connect(
   state => ({
+    error: selectors.getAccountCreationError(state),
     isLoading: selectors.getIsCreatingAccount(state),
   }),
   dispatch => ({
