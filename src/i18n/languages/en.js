@@ -66,4 +66,7 @@ export default {
   diaper: '💩 Diaper change',
   timeOfDay: 'Time of day',
   title: 'Title',
+  orderBy: 'Order by',
+  kind: 'Kind',
+  time: 'Time',
 };

@@ -1,10 +1,12 @@
 // @flow
+import _orderBy from 'lodash/orderBy';
 import i18n from 'i18n-js';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
 import styles from './RoutineSteps.module.scss';
+import type { ID_TYPE } from '../../types/common';
 import type { ROUTINE_STEP_TYPE } from '../../types/routineSteps';
 import * as selectors from '../../reducers';
 import * as actions from '../../actions/routines';
@@ -16,6 +18,7 @@ type RoutineStepsPropTypes = {
   steps: Array<ROUTINE_STEP_TYPE>,
   isLoading: boolean,
   onLoad: Function,
+  match: { params: { routineId: ID_TYPE } },
 };
 
 const RoutineSteps = ({
@@ -23,13 +26,15 @@ const RoutineSteps = ({
   steps = [],
   isLoading,
   onLoad,
+  match: { params: { routineId } },
 }: RoutineStepsPropTypes) => {
-  useEffect(onLoad, []);
+  useEffect(onLoad, [routineId]);
+  const [orderBy, updateOrderBy] = useState('');
   return (
     <div
       className={`
         ${styles.routineStepsContainer}
-        ${!hasSteps ? styles.noSteps : ''}
+        ${!hasSteps || isLoading ? styles.noSteps : ''}
       `}
     >
       {
@@ -47,10 +52,28 @@ const RoutineSteps = ({
         )
       }
       {
-        hasSteps && (
+        hasSteps && !isLoading && (
           <div className={styles.list}>
+            <select
+              className={styles.orderBy}
+              onChange={e => updateOrderBy(e.target.value)}
+              value={orderBy}
+            >
+              <option>
+                { i18n.t('orderBy') }
+              </option>
+              <option value="title">
+                { i18n.t('title') }
+              </option>
+              <option value="priority">
+                { i18n.t('kind') }
+              </option>
+              <option value="time">
+                { i18n.t('time') }
+              </option>
+            </select>
             {
-              steps.map(step => (
+              _orderBy(steps, [orderBy]).map(step => (
                 <EditRoutineStepForm
                   key={step.id}
                   initialValues={step}
@@ -75,15 +98,12 @@ const RoutineSteps = ({
 
 export default withRouter(
   connect(
-    (state, { match: { params: { routineId } } }) => {
-      console.log("steps", selectors.getRoutineSteps(state, routineId))
-      return ({
+    (state, { match: { params: { routineId } } }) => ({
       isAuthenticated: selectors.isAuthenticated(state),
       hasSteps: selectors.getRoutineSteps(state, routineId).length > 0,
       steps: selectors.getRoutineSteps(state, routineId),
       isLoading: selectors.isRoutineFetching(state, routineId),
-    })
-    },
+    }),
     (dispatch, { match: { params: { routineId } } }) => ({
       onLoad() {
         dispatch(actions.startFetchRoutines());

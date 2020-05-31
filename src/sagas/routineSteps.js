@@ -8,7 +8,6 @@ import {
   delay,
   select,
 } from 'redux-saga/effects';
-import { normalize } from 'normalizr';
 
 import { REQUEST_TIMEOUT } from '../settings';
 import { throwTimeout } from '../lib/common-http-js';

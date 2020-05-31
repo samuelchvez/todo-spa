@@ -23,13 +23,14 @@ import * as routineStepsSchemas from '../schemas/routineSteps';
 function* createRoutine(action) {
   try {
     const token = yield select(selectors.getAuthToken);
+    const userId = yield select(selectors.getAuthUserID);
     const { id, title } = action.payload;
 
     const { response, timeout } = yield race({
       response: call(
         [api.Routine, 'create'],
         {
-          data: { title },
+          data: { title, created_by: userId },
           token,
         },
       ),
