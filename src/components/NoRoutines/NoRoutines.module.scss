@@ -1,0 +1,46 @@
+@import '../styles/colors';
+
+
+.noRoutinesInput {
+  border: none;
+  border-bottom: 2px solid fade-out($purple, 0.8);
+  color: $purple;
+  font-size: 3rem;
+  margin-right: 2rem;
+  padding: 1rem 2rem;
+  transition: 0.25s;
+  
+  &:focus {
+    border-bottom-color: fade-out($purple, 0.4);
+  }
+
+  &::placeholder {
+    color: fade-out($purple, 0.7);
+  }
+}
+
+.error {}
+
+.button {
+  cursor: pointer;
+  width: 5rem;
+  height: 5rem;
+  font-size: 3rem;
+  border-radius: 5rem;
+  background: $purple;
+  color: white;
+  border: none;
+  transition: 0.25s;
+
+  &:focus, &:hover {
+    background: fade-out($purple, 0.3);
+    outline: 0;
+    transform: scale(1.25);
+  }
+
+  svg {
+    fill: lighten($purple, 35%);
+    margin-bottom: -2px;
+    transform: scale(0.7);
+  }
+}

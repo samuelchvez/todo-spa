@@ -19,3 +19,7 @@ export const Account = new Resource({
   api,
 });
 
+export const Routine = new Resource({
+  name: 'todo-lists',
+  api,
+});

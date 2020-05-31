@@ -7,13 +7,21 @@ import {
 import {
   watchAccountCreationStarted,
 } from './account';
+import {
+  watchRoutineCreationStarted,
+  watchRoutinesFetchStarted,
+  watchRoutineDeletion,
+} from './routines';
 
 
 function* mainSaga() {
   yield all([
     fork(watchLoginStarted),
-    fork(watchAccountCreationStarted),
     // fork(watchRefreshTokenStarted),
+    fork(watchAccountCreationStarted),
+    fork(watchRoutineCreationStarted),
+    fork(watchRoutinesFetchStarted),
+    fork(watchRoutineDeletion),
   ]);
 }
 

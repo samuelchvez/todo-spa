@@ -50,4 +50,9 @@ export default {
   passwordMissmatch: 'Password missmatch',
   accountCreationCompleted: 'Account creation completed',
   serverError: 'Server error',
+  createYourFirstRoutine: 'Create your first routine!',
+  routines: 'Routines:',
+  loadingRoutines: 'Loading routines...',
+  newRoutine: 'New routine',
+  logout: 'Logout',
 };

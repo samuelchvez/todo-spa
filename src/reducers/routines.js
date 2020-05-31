@@ -21,7 +21,7 @@ const byId = common.byId({
   fetched: [types.FETCH_ROUTINES_COMPLETED],
   removed: [types.ROUTINE_REMOVED],
   confirmed: [types.ADD_ROUTINE_COMPLETED],
-  defaultAttributes: {},
+  defaultAttributes: { isConfirmed: false },
 });
 
 const order = common.order({

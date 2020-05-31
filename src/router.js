@@ -9,7 +9,7 @@ import { createBrowserHistory } from 'history';
 
 import LoginView from './components/views/Login';
 import CreateAccountView from './components/views/CreateAccount';
-import Dashboardview from './components/views/Dashboard';
+import DashboardView from './components/views/Dashboard';
 
 
 // const UserIsAuthenticated = connectedReduxRedirect({

@@ -1,7 +1,7 @@
 //@flow
 import { combineReducers } from 'redux';
 
-import type { ID_TYPE, ERROR_TYPE } from '../types/common';
+import type { ID_TYPE } from '../types/common';
 import type { ROUTINE_STEP_TYPE } from '../types/routineSteps';
 import * as common from './common-reducers';
 import * as types from '../types/routineSteps';

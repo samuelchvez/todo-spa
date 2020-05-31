@@ -1,0 +1,19 @@
+@import '../../styles/colors';
+@import '../../styles/fonts';
+
+
+.dashboardContainer {
+  display: flex;
+  height: 100vh;
+
+  &.noRoutines {
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.loadingRoutines {
+  color: lighten($purple, 20%);
+  font-family: $accentFont;
+  font-size: 2rem;
+}

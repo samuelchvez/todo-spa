@@ -3,10 +3,11 @@ import type { ID_TYPE, ERROR_TYPE } from './common';
 import type { ROUTINE_STEP_TYPE } from './routineSteps';
 
 
-export type ROUTINE_TYPE = {
+export type ROUTINE_TYPE = {|
   id: ID_TYPE,
   title: string,
-};
+  isConfirmed: boolean,
+|};
 
 export type FETCH_ROUTINES_STARTED_TYPE = {
   type: 'FETCH_ROUTINES_STARTED',

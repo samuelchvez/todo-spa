@@ -16,7 +16,7 @@ type LoginFormPropTypes = {
   isLoading: boolean
 };
 
-const validate = (values) => {
+const validate = values => {
   const errors = {};
 
   if (!values.username) { errors.username = i18n.t('required'); }
