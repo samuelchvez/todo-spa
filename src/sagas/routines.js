@@ -12,11 +12,12 @@ import { normalize } from 'normalizr';
 
 import { REQUEST_TIMEOUT } from '../settings';
 import { throwTimeout } from '../lib/common-http-js';
-import { Routine } from '../api';
+import * as api from '../api';
 import * as selectors from '../reducers';
 import * as actions from '../actions/routines';
 import * as types from '../types/routines';
-import { arrayOfRoutines } from '../schemas/routines';
+import * as schemas from '../schemas/routines';
+import * as routineStepsSchemas from '../schemas/routineSteps';
 
 
 function* createRoutine(action) {
@@ -26,7 +27,7 @@ function* createRoutine(action) {
 
     const { response, timeout } = yield race({
       response: call(
-        [Routine, 'create'],
+        [api.Routine, 'create'],
         {
           data: { title },
           token,
@@ -65,7 +66,7 @@ function* fetchRoutines(action) {
 
     const { response, timeout } = yield race({
       response: call(
-        [Routine, 'list'],
+        [api.Routine, 'list'],
         {
           filters: { created_by: userId },
           token,
@@ -81,7 +82,7 @@ function* fetchRoutines(action) {
     const {
       entities: { routines },
       result,
-    } = normalize(response, arrayOfRoutines);
+    } = normalize(response, schemas.arrayOfRoutines);
 
     yield put(actions.completeFetchRoutines(
       routines,
@@ -112,7 +113,7 @@ function* removeRoutine(action) {
 
     const { timeout } = yield race({
       response: call(
-        [Routine, 'remove'],
+        [api.Routine, 'remove'],
         {
           id,
           token,
@@ -131,5 +132,54 @@ export function* watchRoutineDeletion(): Iterator<any> {
   yield takeEvery(
     types.ROUTINE_REMOVED,
     removeRoutine,
+  );
+}
+
+function* fetchRoutine(action) {
+  const token = yield select(selectors.getAuthToken);
+  const { id } = action.payload;
+
+  try {
+    const { response, timeout } = yield race({
+      response: call(
+        [api.RoutineStep, 'list'],
+        {
+          filters: { belongs_to: id },
+          token,
+        },
+      ),
+      timeout: delay(REQUEST_TIMEOUT),
+    });
+
+    if (timeout) {
+      throwTimeout('fetchRoutine saga');
+    }
+
+    const {
+      entities: { routineSteps },
+      result,
+    } = normalize(response, routineStepsSchemas.arrayOfRoutineSteps);
+
+    yield put(actions.completeFetchRoutine(
+      id,
+      routineSteps,
+      result,
+    ));
+  } catch (error) {
+    const { statusCode, message, data, isPlain } = error;
+    yield put(actions.failFetchRoutine({
+      objectId: id,
+      status: statusCode,
+      message,
+      data: isPlain ? i18n.t('serverError'): data,
+      retryAction: action
+    }));
+  }
+}
+
+export function* watchRoutineFetch(): Iterator<any> {
+  yield takeEvery(
+    types.FETCH_ROUTINE_STARTED,
+    fetchRoutine,
   );
 }

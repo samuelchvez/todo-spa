@@ -23,3 +23,8 @@ export const Routine = new Resource({
   name: 'todo-lists',
   api,
 });
+
+export const RoutineStep = new Resource({
+  name: 'todo-items',
+  api,
+});

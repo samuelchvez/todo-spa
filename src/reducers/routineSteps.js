@@ -18,17 +18,21 @@ const byId = common.byId({
   updated: [
     types.ROUTINE_STEP_COMPLETED,
     types.ROUTINE_STEP_CLEARED,
+    types.ROUTINE_STEP_UPDATED,
   ],
   updatedInBulk: [routineTypes.ROUTINE_RESET],
   fetched: [routineTypes.FETCH_ROUTINE_COMPLETED],
   removed: [types.ROUTINE_STEP_REMOVED],
   confirmed: [types.ADD_ROUTINE_STEP_COMPLETED],
+  defaultAttributes: { isConfirmed: false },
 });
 
 const orderByRoutine = common.orderById({
   fetched: [routineTypes.FETCH_ROUTINE_COMPLETED],
+  added: [types.ADD_ROUTINE_STEP_STARTED],
   changed: [types.ADD_ROUTINE_STEP_COMPLETED],
   removed: [types.ROUTINE_STEP_REMOVED],
+  idKey: 'routine',
   elementKey: 'oldId',
   newElementKey: 'newId',
 })
@@ -44,4 +48,4 @@ export default routineSteps;
 
 // Selectors
 export const getRoutineStep = (state: RoutineStepsState, id: ID_TYPE): ?ROUTINE_STEP_TYPE => state.byId[id];
-export const getRoutineSteps = (state: RoutineStepsState, routine: ID_TYPE): Array<?ROUTINE_STEP_TYPE> => state.orderByRoutine[routine].map(i => getRoutineStep(state, i));
+export const getRoutineSteps = (state: RoutineStepsState, routine: ID_TYPE): Array<?ROUTINE_STEP_TYPE> => (state.orderByRoutine[routine] || []).map(i => getRoutineStep(state, i));

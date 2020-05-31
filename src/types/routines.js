@@ -62,6 +62,7 @@ export const FETCH_ROUTINE_STARTED = 'FETCH_ROUTINE_STARTED';
 export type FETCH_ROUTINE_COMPLETED_TYPE = {
   type: 'FETCH_ROUTINE_COMPLETED',
   payload: {
+    routine: ID_TYPE,
     entities: {[ID_TYPE]: ROUTINE_STEP_TYPE},
     order: Array<ID_TYPE>,
   },

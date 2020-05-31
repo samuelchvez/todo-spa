@@ -11,7 +11,13 @@ import {
   watchRoutineCreationStarted,
   watchRoutinesFetchStarted,
   watchRoutineDeletion,
+  watchRoutineFetch,
 } from './routines';
+import {
+  watchRoutineStepCreationStarted,
+  watchRoutineStepDeletion,
+  watchRoutineStepUpdated,
+} from './routineSteps';
 
 
 function* mainSaga() {
@@ -22,6 +28,10 @@ function* mainSaga() {
     fork(watchRoutineCreationStarted),
     fork(watchRoutinesFetchStarted),
     fork(watchRoutineDeletion),
+    fork(watchRoutineFetch),
+    fork(watchRoutineStepCreationStarted),
+    fork(watchRoutineStepDeletion),
+    fork(watchRoutineStepUpdated),
   ]);
 }
 

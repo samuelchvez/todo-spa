@@ -20,11 +20,10 @@
   }
 
   &.selected {
-    background: $skyblue;
+    background: darken($purple, 15%);
     font-weight: bold;
     color: white;
   }
-
 
   &.disabled {
     opacity: 0.3;

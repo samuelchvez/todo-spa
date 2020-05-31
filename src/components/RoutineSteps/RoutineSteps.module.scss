@@ -1,0 +1,27 @@
+@import '../styles/colors';
+@import '../styles/fonts';
+
+
+.routineStepsContainer {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  position: relative;
+
+  &.noSteps {
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.loadingSteps {
+  color: lighten($purple, 20%);
+  font-family: $accentFont;
+  font-size: 2rem;
+}
+
+.list {
+  max-height: 100vh;
+  overflow: auto;
+  padding-bottom: 85px;
+}

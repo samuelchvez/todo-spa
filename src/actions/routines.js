@@ -66,11 +66,14 @@ export const startFetchRoutine = (id: ID_TYPE): FETCH_ROUTINE_STARTED_TYPE => ({
 });
 
 export const completeFetchRoutine = (
+  routineId: ID_TYPE,
   entities: {[ID_TYPE]: ROUTINE_STEP_TYPE},
   order: Array<ID_TYPE>,
 ): FETCH_ROUTINE_COMPLETED_TYPE => ({
   type: types.FETCH_ROUTINE_COMPLETED,
   payload: {
+    id: routineId,
+    routine: routineId,
     entities,
     order,
   },

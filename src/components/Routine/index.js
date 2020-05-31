@@ -35,6 +35,7 @@ const Routine = ({
     <NavLink
       to={`/dashboard/${id}`}
       className={styles.routine}
+      activeClassName={styles.selected}
     >
       { title }
     </NavLink>

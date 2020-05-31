@@ -2,7 +2,7 @@
 import i18n from 'i18n-js';
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { Redirect, NavLink } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 
 import styles from './Dashboard.module.scss';
 import * as selectors from '../../../reducers';

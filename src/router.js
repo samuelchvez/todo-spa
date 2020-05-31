@@ -10,6 +10,7 @@ import { createBrowserHistory } from 'history';
 import LoginView from './components/views/Login';
 import CreateAccountView from './components/views/CreateAccount';
 import DashboardView from './components/views/Dashboard';
+import RoutineView from './components/views/Routine';
 
 
 // const UserIsAuthenticated = connectedReduxRedirect({
@@ -31,6 +32,7 @@ export default () => (
       <Route path="/" component={LoginView} exact />
       <Route path="/create-account" component={CreateAccountView} exact />
       <Route path="/dashboard" component={DashboardView} exact />
+      <Route path="/dashboard/:routineId" component={RoutineView} exact />
       {/* <Route path="/forbidden" component={ ForbiddenView } /> */}
       {/* <Route path="/not-found" component={ NotFoundView } /> */}
       {/* <Route path="/" component={ LoginView } /> */}

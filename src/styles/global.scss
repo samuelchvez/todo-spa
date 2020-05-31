@@ -5,7 +5,7 @@ body, html {
   font-size: 8px;
 }
 
-textarea:focus, input:focus{
+textarea:focus, input:focus, select:focus{
   outline: none;
 }
 
@@ -18,9 +18,9 @@ textarea:focus, input:focus{
 }
 
 .Toastify__toast--error {
-  background: #e56c60;
+  background: $red;
 }
 
 .Toastify__toast--success {
-  background: #74c170;
+  background: $green;
 }
