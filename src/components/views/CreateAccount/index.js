@@ -3,10 +3,10 @@ import i18n from 'i18n-js';
 import React from 'react';
 import { connect } from 'react-redux';
 import { Redirect, NavLink } from 'react-router-dom';
+import { FaBabyCarriage } from 'react-icons/fa';
 
 import * as selectors from '../../../reducers';
 import CreateAccountForm from '../../CreateAccountForm';
-import ExternalLeftPanel from '../../ExternalLeftPanel';
 import ExternalHero from '../../ExternalHero';
 import ExternalContainer from '../../ExternalContainer';
 
@@ -17,9 +17,11 @@ type CreateAccountPropTypes = {
 
 const CreateAccount = ({ isAuthenticated }: CreateAccountPropTypes) => (
   <ExternalContainer>
-    <h1>{i18n.t('mbn')}</h1>
+    <h1>
+      <FaBabyCarriage />
+      {i18n.t('mbn')}
+    </h1>
     <ExternalHero>
-      <ExternalLeftPanel backgroundURL={require('./babygirl.jpg')} />
       <CreateAccountForm />
     </ExternalHero>
     <NavLink to="/">

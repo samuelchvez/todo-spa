@@ -3,19 +3,23 @@
 
 
 .logout {
-  // margin: 0 2rem 2rem 2rem;
-  font-size: 1.5rem;
-  font-family: $accentFont;
+  background: $purple;
   border-radius: 2rem;
-  outline: none;
-  background: $blue;
-  color: white;
   border: none;
-  padding: 1rem 0;
-  cursor: pointer;
-  position: absolute;
   bottom: 2rem;
-  left: 2rem;
-  width: calc(100% - 4rem);
+  color: lighten($purple, 30%);
+  cursor: pointer;
   display: block;
+  font-family: $accentFont;
+  font-size: 1.5rem;
+  left: 2rem;
+  outline: none;
+  padding: 1rem 0;
+  position: absolute;
+  transition: 0.25s;
+  width: calc(100% - 4rem);
+
+  &:hover {
+    background: lighten($purple, 5%);
+  }
 }

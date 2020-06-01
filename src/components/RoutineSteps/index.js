@@ -7,6 +7,7 @@ import { withRouter } from 'react-router-dom';
 
 import styles from './RoutineSteps.module.scss';
 import type { ID_TYPE } from '../../types/common';
+import type { ROUTINE_TYPE } from '../../types/routines';
 import type { ROUTINE_STEP_TYPE } from '../../types/routineSteps';
 import * as selectors from '../../reducers';
 import * as actions from '../../actions/routines';
@@ -19,6 +20,7 @@ type RoutineStepsPropTypes = {
   isLoading: boolean,
   onLoad: Function,
   match: { params: { routineId: ID_TYPE } },
+  routine: ROUTINE_TYPE,
 };
 
 const RoutineSteps = ({
@@ -27,6 +29,7 @@ const RoutineSteps = ({
   isLoading,
   onLoad,
   match: { params: { routineId } },
+  routine = {}
 }: RoutineStepsPropTypes) => {
   useEffect(onLoad, [routineId]);
   const [orderBy, updateOrderBy] = useState('');
@@ -37,6 +40,27 @@ const RoutineSteps = ({
         ${!hasSteps || isLoading ? styles.noSteps : ''}
       `}
     >
+      <h1>
+        { routine.title }
+        <select
+          className={styles.orderBy}
+          onChange={e => updateOrderBy(e.target.value)}
+          value={orderBy}
+        >
+          <option>
+            { i18n.t('orderStepsBy') }
+          </option>
+          <option value="title">
+            { i18n.t('title') }
+          </option>
+          <option value="priority">
+            { i18n.t('kind') }
+          </option>
+          <option value="time">
+            { i18n.t('time') }
+          </option>
+        </select>
+      </h1>
       {
         isLoading && (
           <div className={styles.loadingSteps}>
@@ -47,31 +71,15 @@ const RoutineSteps = ({
       {
         !hasSteps && !isLoading && (
           <div className={styles.loadingSteps}>
-            { i18n.t('noSteps') }
+            <div className={styles.loadingText}>
+              { i18n.t('noSteps') }
+            </div>
           </div>
         )
       }
       {
         hasSteps && !isLoading && (
           <div className={styles.list}>
-            <select
-              className={styles.orderBy}
-              onChange={e => updateOrderBy(e.target.value)}
-              value={orderBy}
-            >
-              <option>
-                { i18n.t('orderBy') }
-              </option>
-              <option value="title">
-                { i18n.t('title') }
-              </option>
-              <option value="priority">
-                { i18n.t('kind') }
-              </option>
-              <option value="time">
-                { i18n.t('time') }
-              </option>
-            </select>
             {
               _orderBy(steps, [orderBy]).map(step => (
                 <EditRoutineStepForm
@@ -103,6 +111,7 @@ export default withRouter(
       hasSteps: selectors.getRoutineSteps(state, routineId).length > 0,
       steps: selectors.getRoutineSteps(state, routineId),
       isLoading: selectors.isRoutineFetching(state, routineId),
+      routine: selectors.getRoutine(state, routineId),
     }),
     (dispatch, { match: { params: { routineId } } }) => ({
       onLoad() {

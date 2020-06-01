@@ -21,16 +21,26 @@
   }
 
   &.toEdit {
-    border-top: none;
     border-bottom: 1px solid $lightGray;
-    position: relative;
-    display: flex;
+    border-top: none;
     bottom: auto;
-    right: auto;
+    display: flex;
     left: auto;
+    padding-left: 1rem;
+    position: relative;
+    right: auto;
 
     input, select {
       border-color: transparent;
+    }
+
+    input[name="title"] {
+      padding-left: 1rem;
+    }
+
+    select {
+      background: white;
+      border: 1px solid $lightGray;
     }
   }
 
@@ -51,9 +61,9 @@
   select, input[type="date"] {
     border-radius: 1rem;
     border: 1px solid $gray;
-    padding: 0 2rem;
     color: $gray;
     margin-right: 1rem;
+    padding: 0 2rem;
   }
 }
 
@@ -65,7 +75,7 @@
   flex: 1;
   font-size: 2rem;
   margin-right: 1rem;
-  padding: 2rem;
+  padding: 1rem 2rem;
   transition: 0.25s;
 
   &::placeholder {
@@ -80,20 +90,20 @@
 .button {
   align-items: center;
   background: $blue;
-  border-radius: 1rem;
+  border-radius: 0.5rem;
   border: none;
   color: lighten($blue, 20%);
   justify-content: center;
-  padding: 0 2rem;
+  padding: 0 1rem;
 
   &.removeButton {
-    background: $red;
-    color: lighten($red, 20%);
+    background: none;
+    color: lighten($purple, 20%);
   }
 
   &.saveButton {
-    background: $green;
-    color: lighten($green, 20%);
+    background: $blue;
+    color: lighten($blue, 20%);
     margin-right: 1rem;
   }
 }

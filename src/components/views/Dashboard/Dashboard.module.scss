@@ -13,7 +13,14 @@
 }
 
 .loadingRoutines {
+  align-items: center;
   color: lighten($purple, 20%);
+  display: flex;
+  flex: 1;
   font-family: $accentFont;
   font-size: 2rem;
+  justify-content: center;
+  text-align: center;
+  padding: 4rem;
+  line-height: 3rem;
 }

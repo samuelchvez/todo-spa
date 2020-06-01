@@ -5,7 +5,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import { Form, Field } from 'react-final-form';
-import { FaPlus, FaTimes, FaCheck } from 'react-icons/fa';
+import { FaPlus, FaTrash, FaCheck } from 'react-icons/fa';
 
 import styles from './RoutineStepForm.module.scss';
 import type { ID_TYPE } from '../../types/common';
@@ -61,6 +61,24 @@ const RoutineStepForm = ({
               }
             }
           >
+            {
+              toEdit && (
+                <button
+                  className={`
+                    ${styles.button}
+                    ${styles.removeButton}
+                  `}
+                  onClick={
+                    e => {
+                      e.preventDefault();
+                      onButtonClick && onButtonClick(id);
+                    }
+                  }
+                >
+                  <FaTrash size="16" />
+                </button>
+              )
+            }
             <Field
               name="title"
               placeholder={i18n.t('title')}
@@ -374,31 +392,15 @@ const RoutineStepForm = ({
             </Field>
             {
               toEdit ? (
-                <>
-                  <button
-                    type="submit"
-                    className={`
-                      ${styles.button}
-                      ${styles.saveButton}
-                    `}
-                  >
-                    <FaCheck size="16" />
-                  </button>
-                  <button
-                    className={`
-                      ${styles.button}
-                      ${styles.removeButton}
-                    `}
-                    onClick={
-                      e => {
-                        e.preventDefault();
-                        onButtonClick && onButtonClick(id);
-                      }
-                    }
-                  >
-                    <FaTimes size="16" />
-                  </button>
-                </>
+                <button
+                  type="submit"
+                  className={`
+                    ${styles.button}
+                    ${styles.saveButton}
+                  `}
+                >
+                  <FaCheck size="16" />
+                </button>
               ) : (
                 <button type="submit" className={styles.button}>
                   <FaPlus size="16" />

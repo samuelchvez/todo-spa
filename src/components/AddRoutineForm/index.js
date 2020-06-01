@@ -8,7 +8,13 @@ import { FaPlus } from 'react-icons/fa';
 
 import styles from './AddRoutineForm.module.scss';
 import * as actions from '../../actions/routines';
+import * as selectors from '../../reducers';
 
+
+type AddRoutineFormPropTypes = {
+  onSubmit: Function,
+  hasRoutines: boolean,
+};
 
 const validate = values => {
   const errors = {};
@@ -18,8 +24,13 @@ const validate = values => {
   return errors;
 };
 
-const AddRoutineForm = ({ onSubmit }) => (
-  <div className={styles.addRoutineForm}>
+const AddRoutineForm = ({ onSubmit, hasRoutines }: AddRoutineFormPropTypes) => (
+  <div
+    className={`
+      ${styles.addRoutineForm}
+      ${hasRoutines ? '' : styles.attention}
+    `}
+  >
     <Form
       onSubmit={onSubmit}
       validate={validate}
@@ -51,7 +62,9 @@ const AddRoutineForm = ({ onSubmit }) => (
 
 
 export default connect(
-  undefined,
+  state => ({
+    hasRoutines: selectors.getRoutines(state).length > 0,
+  }),
   dispatch => ({
     onSubmit(values) {
       dispatch(actions.startAddRoutine(
