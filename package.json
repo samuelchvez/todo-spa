@@ -14,7 +14,7 @@
     "is-empty-object": "^1.1.1",
     "jwt-decode": "^2.2.0",
     "lodash": "^4.17.15",
-    "node-sass": "^4.14.1",
+    "node-sass": "^7.0.0",
     "normalize.css": "^8.0.1",
     "normalizr": "^3.6.0",
     "react": "^16.13.1",
